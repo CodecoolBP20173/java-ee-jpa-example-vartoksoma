@@ -9,18 +9,22 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String country;
+    @Column(name = "Zip", length = 4)
     private String zipcode;
+
     private String city;
-    private String addr;
+    private String address;
+    @OneToOne(mappedBy = "address")
+    private Student student;
 
     public Address() {
     }
 
-    public Address(String country, String zipcode, String city, String addr) {
+    public Address(String country, String zipcode, String city, String address) {
         this.country = country;
         this.zipcode = zipcode;
         this.city = city;
-        this.addr = addr;
+        this.address = address;
     }
 
     public long getId() {
@@ -55,12 +59,12 @@ public class Address {
         this.city = city;
     }
 
-    public String getAddr() {
-        return addr;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddr(String addr) {
-        this.addr = addr;
+    public void setAddress(String addr) {
+        this.address = addr;
     }
 
     @Override
@@ -70,7 +74,7 @@ public class Address {
                 ", country='" + country + '\'' +
                 ", zipcode='" + zipcode + '\'' +
                 ", city='" + city + '\'' +
-                ", addr='" + addr + '\'' +
+                ", addr='" + address + '\'' +
                 '}';
     }
 

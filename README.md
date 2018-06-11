@@ -1,4 +1,4 @@
-## JPA Example Project
+    ## JPA Example Project
 
 Follow the instructions **point by point**, run the code and **check the results** in the database. Check the states of in-memory objects as well (use the debugger, logging, or `System.out`).
 
@@ -6,7 +6,7 @@ Follow the instructions **point by point**, run the code and **check the results
 
 1. Create a PostgreSQL database `jpaexampleDB` and modify DB username and password in `resources/META-INF/persistence.xml`.
 1. Start `JPAExample`. `Student` and `Address` are annotated with `@Entity`, so if you check the database you should see two tables created by Hibernate.
-1. Use the `@Column` annotation to modify the default O-R mapping! Change the column name for attribute `zipcode` to `Zip`, limit its length to 4, and set the `email` field to `UNIQUE` and `NOT NULL`!
+1. Use the `@Column` annotation to modify the default O-R mapping! Change the column name for attribute `zipcode` to `zipcode`, limit its length to 4, and set the `email` field to `UNIQUE` and `NOT NULL`!
 1. It is not needed to persist `age` of students since it is calculated from `dateOfBirth` - exclude it from the table by marking it `@Transient`.
 1. Add a `List<String> phoneNumbers` to students, and add it to the constructor! You can fix the problem by `@ElementCollection`. Set the name of the auxiliary table to `Phone`.
 1. Now students have an address. What happens when addresses have a student as well? Set a symmetric `@OneToOne` relation and see what happens!

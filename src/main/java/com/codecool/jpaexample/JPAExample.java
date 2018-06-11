@@ -26,7 +26,7 @@ public class JPAExample {
 
         Klass classBp2 = new Klass("Budapest 2016-2");
         Address address = new Address("Hungary", "1234", "Budapest", "Macskakő út 5.");
-        Student student = new Student("Ödön", "odon@tokodon.hu", birthDate1, address);
+        Student student = new Student("Ödön", "odon@tokodon.hu", birthDate1, address, "06303266161");
         classBp2.addStudent(student);
 
         EntityTransaction transaction = em.getTransaction();
@@ -37,7 +37,7 @@ public class JPAExample {
         System.out.println("Ödön saved.");
 
         Address address2 = new Address("Hungary", "6789", "Budapest", "Harap u. 3.");
-        Student student2 = new Student("Aladár", "ktyfl@gmail.com", birthDate2, address);
+        Student student2 = new Student("Aladár", "ktyfl@gmail.com", birthDate2, address2, "063284618");
         classBp2.addStudent(student2);
 
         transaction.begin();
@@ -66,11 +66,11 @@ public class JPAExample {
 
         Address foundAddress1 = em.find(Address.class, 1L);
         System.out.println("--Found address #1");
-        System.out.println("----address----" + foundAddress1.getAddr());
+        System.out.println("----address----" + foundAddress1.getAddress());
 
         Address foundAddress2 = em.find(Address.class, 2L);
         System.out.println("--Found address #2");
-        System.out.println("----address----" + foundAddress2.getAddr());
+        System.out.println("----address----" + foundAddress2.getAddress());
 
         em.close();
         emf.close();
