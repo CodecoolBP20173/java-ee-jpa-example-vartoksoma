@@ -18,6 +18,9 @@ public class Student {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @ManyToOne
+    @JoinColumn(name = "klass_id")
+    private Klass klass;
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 
@@ -87,6 +90,10 @@ public class Student {
 
     public Address getAddress() {
         return address;
+    }
+
+    public void setKlass(Klass klass){
+        this.klass = klass;
     }
 
     public void setAddress(Address address) {

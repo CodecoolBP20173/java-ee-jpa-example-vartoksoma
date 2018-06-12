@@ -23,14 +23,15 @@ public class JPAExample {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        Klass classBp2 = new Klass("Budapest 2016-2");
+        EntityTransaction transaction = em.getTransaction();
+        Klass classBp2 = new Klass("Budapest 2016-2", CCLocation.BUDAPEST);
         Address address = new Address("Hungary", "1234", "Budapest", "Macskakő út 5.");
         Student student = new Student("Ödön", "odon@tokodon.hu", birthDate1, address, "06303266161");
         classBp2.addStudent(student);
 
-        EntityTransaction transaction = em.getTransaction();
+
         transaction.begin();
+        em.persist(classBp2);
         em.persist(address);
         em.persist(student);
         transaction.commit();
@@ -49,31 +50,35 @@ public class JPAExample {
 
     public static void main(String[] args) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpaexamplePU");
-        EntityManager em = emf.createEntityManager();
+        try {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpaexamplePU");
+            EntityManager em = emf.createEntityManager();
 
-        populateDb(em);
+            populateDb(em);
 
-        Student foundStudent1 = em.find(Student.class, 1L);
-        System.out.println("--Found student #1");
-        System.out.println("----name----" + foundStudent1.getName());
-        System.out.println("----address of student----" + foundStudent1.getAddress());
+            Student foundStudent1 = em.find(Student.class, 1L);
+            System.out.println("--Found student #1");
+            System.out.println("----name----" + foundStudent1.getName());
+            System.out.println("----address of student----" + foundStudent1.getAddress());
 
-        Student foundStudent2 = em.find(Student.class, 2L);
-        System.out.println("--Found student #2");
-        System.out.println("----name----" + foundStudent2.getName());
-        System.out.println("----address of student----" + foundStudent2.getAddress());
+            Student foundStudent2 = em.find(Student.class, 2L);
+            System.out.println("--Found student #2");
+            System.out.println("----name----" + foundStudent2.getName());
+            System.out.println("----address of student----" + foundStudent2.getAddress());
 
-        Address foundAddress1 = em.find(Address.class, 1L);
-        System.out.println("--Found address #1");
-        System.out.println("----address----" + foundAddress1.getAddress());
+            Address foundAddress1 = em.find(Address.class, 1L);
+            System.out.println("--Found address #1");
+            System.out.println("----address----" + foundAddress1.getAddress());
 
-        Address foundAddress2 = em.find(Address.class, 2L);
-        System.out.println("--Found address #2");
-        System.out.println("----address----" + foundAddress2.getAddress());
+            Address foundAddress2 = em.find(Address.class, 2L);
+            System.out.println("--Found address #2");
+            System.out.println("----address----" + foundAddress2.getAddress());
 
-        em.close();
-        emf.close();
+            em.close();
+            emf.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 }
